@@ -3,9 +3,17 @@ import "./globals.css";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Personal Blog",
-  description: "A minimal personal blog",
+  title: "Yitong Zhang",
+  description: "Designer in San Francisco",
 };
+
+function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <Link href={href} className="nav-link">
+      {children}
+    </Link>
+  );
+}
 
 export default function RootLayout({
   children,
@@ -16,26 +24,27 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className="min-h-screen flex flex-col">
-          <nav className="border-b border-gray-200">
-            <div className="max-w-4xl mx-auto px-4 py-6">
-              <div className="flex gap-8">
-                <Link href="/writing" className="hover:text-gray-600 transition-colors">
-                  writing
-                </Link>
-                <Link href="/work" className="hover:text-gray-600 transition-colors">
-                  work
-                </Link>
-                <Link href="/about" className="hover:text-gray-600 transition-colors">
-                  about
-                </Link>
+          <nav className="pt-12 pb-8 md:pt-16 md:pb-12">
+            <div className="max-w-2xl mx-auto px-6">
+              <div className="flex gap-6">
+                <NavLink href="/writing">Writing</NavLink>
+                <NavLink href="/work">Work</NavLink>
+                <NavLink href="/about">About</NavLink>
               </div>
             </div>
           </nav>
-          <main className="flex-1">
-            <div className="max-w-4xl mx-auto px-4 py-12">
+          <main className="flex-1 pb-24">
+            <div className="max-w-2xl mx-auto px-6">
               {children}
             </div>
           </main>
+          <footer className="py-8">
+            <div className="max-w-2xl mx-auto px-6">
+              <p className="post-date">
+                © {new Date().getFullYear()}
+              </p>
+            </div>
+          </footer>
         </div>
       </body>
     </html>

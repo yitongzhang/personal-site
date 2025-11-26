@@ -1,33 +1,53 @@
 export default function WorkPage() {
   const projects = [
     {
-      title: "Personal Blog",
-      description: "A minimal blog built with Next.js and Tailwind CSS",
-      year: "2024",
+      title: "Agora",
+      description: "Governance infrastructure for onchain protocols",
+      year: "2023–",
+      url: "https://nounsagora.com/",
     },
     {
-      title: "Task Manager",
-      description: "A simple task management application with React",
-      year: "2023",
+      title: "Vector DAO",
+      description: "Coop-style design agency for web3",
+      year: "2022–",
+      url: "https://vectordao.com/",
     },
     {
-      title: "Weather Dashboard",
-      description: "Real-time weather data visualization",
-      year: "2023",
+      title: "Coinbase",
+      description: "Product design for consumer crypto",
+      year: "2018–22",
+    },
+    {
+      title: "Autoflow",
+      description: "Auto-layout plugin for Figma",
+      year: "2020",
+      url: "https://www.flowchart.design/",
+    },
+    {
+      title: "Goodweb.design",
+      description: "Marketing page pattern library",
+      year: "2019",
+      url: "http://goodweb.design/",
     },
   ];
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-8">Work</h1>
-      <div className="space-y-8">
+    <div className="animate-in">
+      <h1 className="page-title">Work</h1>
+      <div>
         {projects.map((project, index) => (
-          <article key={index}>
-            <div className="flex justify-between items-baseline mb-2">
-              <h2 className="text-xl font-semibold">{project.title}</h2>
-              <span className="text-sm text-gray-500">{project.year}</span>
+          <article key={index} className="work-item">
+            <div className="flex justify-between items-baseline gap-4">
+              {project.url ? (
+                <a href={project.url} className="work-title link">
+                  {project.title}
+                </a>
+              ) : (
+                <h2 className="work-title">{project.title}</h2>
+              )}
+              <span className="work-year flex-shrink-0">{project.year}</span>
             </div>
-            <p className="text-gray-600">{project.description}</p>
+            <p className="work-description">{project.description}</p>
           </article>
         ))}
       </div>

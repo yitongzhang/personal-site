@@ -12,17 +12,16 @@ export default function PostPage({ params }: { params: { slug: string } }) {
   const post = getPostBySlug(params.slug);
 
   return (
-    <article>
-      <Link
-        href="/writing"
-        className="text-sm text-gray-500 hover:text-gray-700 mb-8 inline-block"
-      >
-        ← Back to writing
+    <article className="animate-in">
+      <Link href="/writing" className="back-link mb-12 inline-block">
+        Writing
       </Link>
-      <h1 className="text-3xl font-bold mb-2 mt-4">{post.title}</h1>
-      <time className="text-sm text-gray-500 block mb-8">{post.date}</time>
+      <header className="mb-12">
+        <h1 className="page-title !mb-3">{post.title}</h1>
+        <time className="post-date">{post.date}</time>
+      </header>
       <div
-        className="prose prose-gray max-w-none"
+        className="prose-custom"
         dangerouslySetInnerHTML={{ __html: post.html }}
       />
     </article>

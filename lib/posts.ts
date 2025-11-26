@@ -12,6 +12,15 @@ export interface Post {
   content: string;
 }
 
+function formatDate(date: Date | string): string {
+  const d = new Date(date);
+  const months = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+  ];
+  return `${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
 export function getAllPosts(): Post[] {
   const fileNames = fs.readdirSync(postsDirectory);
   const allPostsData = fileNames
@@ -25,12 +34,13 @@ export function getAllPosts(): Post[] {
       return {
         slug,
         title: data.title,
-        date: String(data.date),
+        date: formatDate(data.date),
+        rawDate: new Date(data.date),
         content,
       };
     });
 
-  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
+  return allPostsData.sort((a, b) => (a.rawDate < b.rawDate ? 1 : -1));
 }
 
 export function getPostBySlug(slug: string): Post & { html: string } {
@@ -42,7 +52,7 @@ export function getPostBySlug(slug: string): Post & { html: string } {
   return {
     slug,
     title: data.title,
-    date: String(data.date),
+    date: formatDate(data.date),
     content,
     html: html as string,
   };
